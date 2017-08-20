@@ -1,5 +1,6 @@
 package com.artronics.model;
 
+
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import java.util.Currency;
