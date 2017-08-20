@@ -9,6 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles(value = "test")
+//@Import({RestRepositoryConfiguration.class})
 public class ApiControllerTest {
     @Autowired
     protected MockMvc mvc;

@@ -28,7 +28,7 @@ public class UserControllerTest extends ApiControllerTest {
         // should be any otherwise will return null
         given(userService.create(any(User.class))).willReturn(user);
 
-        mvc.perform(post("/users")
+        mvc.perform(post("/api/users")
         .contentType(MediaType.APPLICATION_JSON).content(gson.toJson(user)))
         .andExpect(status().isCreated())
         .andExpect(jsonPath("$.firstName", is(user.getFirstName())))

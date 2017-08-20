@@ -1,7 +1,9 @@
 package com.artronics.repository;
 
 import com.artronics.model.Customer;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-public interface CustomerRepository extends CrudRepository<Customer, Long> {
+@RepositoryRestResource(collectionResourceRel = "customers", path = "customers")
+public interface CustomerRepository extends PagingAndSortingRepository<Customer, Long> {
 }
