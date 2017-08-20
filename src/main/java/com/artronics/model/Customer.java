@@ -1,7 +1,5 @@
 package com.artronics.model;
 
-import com.artronics.controller.Account;
-
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;

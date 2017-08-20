@@ -1,8 +1,4 @@
-package com.artronics.controller;
-
-import com.artronics.model.BaseModel;
-import com.artronics.model.Customer;
-import com.artronics.model.User;
+package com.artronics.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
