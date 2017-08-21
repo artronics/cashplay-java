@@ -1,5 +1,6 @@
 package com.artronics.service;
 
+import com.artronics.model.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -8,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.util.HashMap;
 
 import static java.util.Collections.emptyList;
 
@@ -17,11 +19,15 @@ public class TokenAuthenticationService {
     static final String TOKEN_PREFIX = "Bearer";
     static final String HEADER_STRING = "Authorization";
 
-    public static void addAuthentication(HttpServletResponse res, String username) {
+    public static void addAuthentication(HttpServletResponse res, User user) {
+        HashMap<String, Object> claims = new HashMap<>();
+        claims.put("account", user.getAccount().getName());
+
         String JWT = Jwts.builder()
-                .setSubject(username)
+                .setSubject(user.getEmail())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET)
+                .setClaims(claims)
                 .compact();
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
     }

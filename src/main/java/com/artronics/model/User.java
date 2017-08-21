@@ -1,32 +1,36 @@
 package com.artronics.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import com.artronics.security.BCryptPasswordDeserializer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 public class User extends BaseModel{
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
 
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @Size(min = 60, max = 60)
+    @Column(name = "password", nullable = false, length = 60)
+    @JsonDeserialize(using = BCryptPasswordDeserializer.class)
+    @JsonIgnore
     private String password;
 
     public User() {
     }
 
-    public User(String firstName) {
-        this.name = firstName;
-    }
-
-    public String getFirstName() {
-        return name;
+    public User(String name) {
+        this.name = name;
     }
 
     public Account getAccount() {
@@ -61,7 +65,4 @@ public class User extends BaseModel{
         this.password = password;
     }
 
-    public void setFirstName(String firstName) {
-        this.name = firstName;
-    }
 }

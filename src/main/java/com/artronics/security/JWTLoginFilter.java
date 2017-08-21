@@ -1,5 +1,7 @@
 package com.artronics.security;
 
+import com.artronics.model.User;
+import com.artronics.repository.UserRepository;
 import com.artronics.service.TokenAuthenticationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,9 +20,12 @@ import java.util.Collections;
 
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
-    public JWTLoginFilter(String url, AuthenticationManager authManager) {
+    private UserRepository userRepository;
+
+    public JWTLoginFilter(String url, AuthenticationManager authManager, UserRepository userRepository) {
         super(new AntPathRequestMatcher(url));
         setAuthenticationManager(authManager);
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -31,7 +36,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
                 .readValue(req.getInputStream(), AccountCredentials.class);
         return getAuthenticationManager().authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        creds.getUsername(),
+                        creds.getEmail(),
                         creds.getPassword(),
                         Collections.emptyList()
                 )
@@ -43,6 +48,8 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
             HttpServletRequest req,
             HttpServletResponse res, FilterChain chain,
             Authentication auth) throws IOException, ServletException {
-        TokenAuthenticationService.addAuthentication(res, auth.getName());
+
+        User user = userRepository.findByEmail(auth.getName());
+        TokenAuthenticationService.addAuthentication(res, user);
     }
 }

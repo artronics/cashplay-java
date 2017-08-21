@@ -31,7 +31,7 @@ public class UserControllerTest extends ApiControllerTest {
         mvc.perform(post("/api/users")
         .contentType(MediaType.APPLICATION_JSON).content(gson.toJson(user)))
         .andExpect(status().isCreated())
-        .andExpect(jsonPath("$.firstName", is(user.getFirstName())))
+                .andExpect(jsonPath("$.firstName", is(user.getName())))
                 .andDo(print());
     }
 }
