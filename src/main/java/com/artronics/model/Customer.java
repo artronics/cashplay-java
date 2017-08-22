@@ -14,9 +14,10 @@ public class Customer extends BaseModel {
     private String firstName;
     private String lastName;
 
-
-    public Customer(String firstName) {
+    public Customer(Account account, String firstName, String lastName) {
+        this.account = account;
         this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public Customer() {

@@ -19,8 +19,16 @@ public class CashplayApplication {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("*");
+                registry.addMapping("/**");
             }
         };
     }
+
+//    @Bean
+//    public FilterRegistrationBean headerModifierFilter() {
+//	    FilterRegistrationBean register = new FilterRegistrationBean();
+//	    register.setFilter(new HeaderModifierFilter());
+//
+//	    return register;
+//    }
 }

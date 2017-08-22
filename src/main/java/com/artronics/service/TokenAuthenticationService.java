@@ -21,13 +21,13 @@ public class TokenAuthenticationService {
 
     public static void addAuthentication(HttpServletResponse res, User user) {
         HashMap<String, Object> claims = new HashMap<>();
-        claims.put("account", user.getAccount().getName());
+//        claims.put("account", user.getAccount().getName());
 
         String JWT = Jwts.builder()
                 .setSubject(user.getEmail())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET)
-                .setClaims(claims)
+//                .setClaims(claims)
                 .compact();
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
     }
