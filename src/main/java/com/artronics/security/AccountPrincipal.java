@@ -1,7 +1,10 @@
 package com.artronics.security;
 
+import com.artronics.model.User;
+
 public class AccountPrincipal implements java.security.Principal {
 
+    private User user;
     private final String email;
     private final Long accountId;
 
@@ -12,6 +15,14 @@ public class AccountPrincipal implements java.security.Principal {
 
     public String getEmail() {
         return email;
+    }
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public Long username() {
+        return accountId;
     }
 
     @Override

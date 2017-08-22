@@ -26,13 +26,6 @@ public class User extends BaseModel{
     @JsonIgnore
     private String password;
 
-    public User() {
-    }
-
-    public User(String name) {
-        this.name = name;
-    }
-
     public Account getAccount() {
         return account;
     }

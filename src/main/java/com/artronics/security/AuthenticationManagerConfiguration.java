@@ -3,6 +3,7 @@ package com.artronics.security;
 import com.artronics.model.User;
 import com.artronics.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,6 +16,12 @@ import org.springframework.stereotype.Component;
 public class AuthenticationManagerConfiguration implements AuthenticationManager {
     @Autowired
     private UserRepository userRepository;
+
+    // This is needed for SpEL to access principle in Query Methods
+    @Bean
+    public SecurityEvaluationContextExtension securityEvaluationContextExtension() {
+        return new SecurityEvaluationContextExtension();
+    }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
