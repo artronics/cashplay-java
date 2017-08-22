@@ -3,15 +3,11 @@ package com.artronics.service;
 import com.artronics.model.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.HashMap;
-
-import static java.util.Collections.emptyList;
 
 public class TokenAuthenticationService {
     static final long EXPIRATIONTIME = 864_000_000; // 10 days
@@ -32,7 +28,7 @@ public class TokenAuthenticationService {
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
     }
 
-    public static Authentication getAuthentication(HttpServletRequest request) {
+    public static String getUserEmail(HttpServletRequest request) {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
             // parse the token.
@@ -42,9 +38,7 @@ public class TokenAuthenticationService {
                     .getBody()
                     .getSubject();
 
-            return user != null ?
-                    new UsernamePasswordAuthenticationToken(user, null, emptyList()) :
-                    null;
+            return user;
         }
         return null;
     }

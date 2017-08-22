@@ -36,7 +36,7 @@ public class Customer extends BaseModel {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstName = firstName.toLowerCase();
     }
 
     public String getLastName() {
@@ -44,6 +44,6 @@ public class Customer extends BaseModel {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastName = lastName.toLowerCase();
     }
 }

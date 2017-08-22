@@ -2,11 +2,9 @@ package com.artronics.controller;
 
 import com.artronics.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
 
-@RestController()
-@RequestMapping("/customers")
+@RepositoryRestController()
 public class CustomerController extends ApiController {
     @Autowired
     private CustomerService customerService;

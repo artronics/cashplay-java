@@ -23,6 +23,11 @@ public class DataLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
+        account1();
+        account2();
+    }
+
+    private void account1() {
         Account account = accountRepository.save(new Account("cashconversions"));
         User user = new User();
         user.setName("jalal");
@@ -33,11 +38,36 @@ public class DataLoader implements ApplicationRunner {
         userRepository.save(user);
 
         Customer c1 = new Customer(account, "Jalal", "Hosseini");
-        Customer c2 = new Customer(account, "Magid", "Sarhangi");
+        Customer c2 = new Customer(account, "magid", "sarhangi");
         Customer c3 = new Customer(account, "Reza", "Hosseini");
         Customer c4 = new Customer(account, "Ali", "Moghadasian");
         Customer c5 = new Customer(account, "Nazanin", "Keshmiri");
         Customer c6 = new Customer(account, "Akram", "Sabzalipour");
+
+        customerRepository.save(c1);
+        customerRepository.save(c2);
+        customerRepository.save(c3);
+        customerRepository.save(c4);
+        customerRepository.save(c5);
+        customerRepository.save(c6);
+    }
+
+    private void account2() {
+        Account account = accountRepository.save(new Account("foo"));
+        User user = new User();
+        user.setName("foo");
+        user.setEmail("foo@bar.com");
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode("secret"));
+        user.setAccount(account);
+        userRepository.save(user);
+
+        Customer c1 = new Customer(account, "kir", "kiri");
+        Customer c2 = new Customer(account, "gholi", "ghilian");
+        Customer c3 = new Customer(account, "kos", "kosmashang");
+        Customer c4 = new Customer(account, "jafang", "jagana");
+        Customer c5 = new Customer(account, "ajdar", "jeefar");
+        Customer c6 = new Customer(account, "ak", "gholian");
 
         customerRepository.save(c1);
         customerRepository.save(c2);
