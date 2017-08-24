@@ -27,16 +27,24 @@ public class JWTAuthenticationFilter extends GenericFilterBean {
                          ServletResponse response,
                          FilterChain filterChain)
             throws IOException, ServletException {
+
         Long accountId = TokenAuthenticationService
                 .getAccountId((HttpServletRequest) request);
 
-        Authentication authentication = new UsernamePasswordAuthenticationToken(
+        Long userId = TokenAuthenticationService.getUserId((HttpServletRequest) request);
+
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                 accountId,
                 null,
                 Collections.emptyList()
         );
+        token.setDetails(userId);
+
+        Authentication authentication = token;
+
         SecurityContextHolder.getContext()
                 .setAuthentication(authentication);
+
         filterChain.doFilter(request, response);
     }
 }

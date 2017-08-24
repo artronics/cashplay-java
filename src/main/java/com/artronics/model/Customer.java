@@ -1,5 +1,7 @@
 package com.artronics.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -9,6 +11,7 @@ public class Customer extends BaseModel {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @JsonIgnore
     private Account account;
 
     private String firstName;

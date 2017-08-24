@@ -25,13 +25,13 @@ public class AuthenticationManagerConfiguration implements AuthenticationManager
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String email = authentication.getDetails() + "";
+        Long userId = (Long) authentication.getDetails();
         String password = authentication.getCredentials() + "";
-        return auth(email, password, authentication.getPrincipal());
+        return auth(userId, password, authentication.getPrincipal());
     }
 
-    private Authentication auth(String email, String password, Object pricipal) {
-        User user = userRepository.findByEmail(email);
+    private Authentication auth(Long userId, String password, Object pricipal) {
+        User user = userRepository.findOne(userId);
         if (user == null) {
             throw new BadCredentialsException("1000");
         }
@@ -40,6 +40,8 @@ public class AuthenticationManagerConfiguration implements AuthenticationManager
             throw new BadCredentialsException("1000");
         }
 
-        return new UsernamePasswordAuthenticationToken(pricipal, password);
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(pricipal, password);
+        token.setDetails(userId);
+        return token;
     }
 }

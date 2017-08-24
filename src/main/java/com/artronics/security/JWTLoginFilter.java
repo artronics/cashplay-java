@@ -21,7 +21,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.Collections;
 
@@ -51,14 +50,13 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
                 creds.getPassword(),
                 Collections.emptyList()
         );
-        token.setDetails(creds.getEmail());
+        token.setDetails(user.getId());
 
         Authentication authentication = getAuthenticationManager().authenticate(token);
 
         return authentication;
     }
 
-    @Transactional
     @Override
     protected void successfulAuthentication(
             HttpServletRequest req,
@@ -67,7 +65,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
         addUserAndAccountToRes(res, auth);
 
-        TokenAuthenticationService.addAuthentication(res, (Long) auth.getPrincipal());
+        TokenAuthenticationService.addAuthentication(res, auth);
     }
 
     private void addUserAndAccountToRes(HttpServletResponse res, Authentication auth) throws IOException {
