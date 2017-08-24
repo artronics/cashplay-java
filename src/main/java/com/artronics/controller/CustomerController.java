@@ -21,7 +21,7 @@ public class CustomerController extends ApiController {
     @Autowired
     private AccountRepository accountRepository;
 
-    @PostMapping(path = "/account/{id}/customer")
+    @PostMapping(path = "/account/{id}/customers")
     public ResponseEntity<Customer> create(Authentication auth,
                                            @RequestBody() Customer customer,
                                            @PathVariable("id") Long id,
@@ -30,10 +30,9 @@ public class CustomerController extends ApiController {
             throw new AccessDeniedException("access denied.");
         }
         if (auth.getDetails() != userId) {
-            System.out.println(auth.getDetails());
             throw new AccessDeniedException("You are not the authenticated User");
         }
-//        Account account = accountRepository.findById(id);
+
         Account account = new Account();
         account.setId(id);
         customer.setAccount(account);
@@ -42,19 +41,4 @@ public class CustomerController extends ApiController {
         return new ResponseEntity<Customer>(customer, HttpStatus.CREATED);
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<Customer>> getAll(@RequestParam(required = false) String limit) {
-//        List<Customer> customers = new ArrayList<>();
-//        customers.add(new Customer("kir"));
-//        customers.add(new Customer("kos"));
-//
-//        return new ResponseEntity<List<Customer>>(customers, HttpStatus.OK);
-//    }
-//
-//    @PostMapping
-//    public ResponseEntity<Customer> create(@RequestBody Customer customer) {
-//        customer = customerService.create(customer);
-//
-//        return new ResponseEntity<Customer>(customer, HttpStatus.CREATED);
-//    }
 }
