@@ -31,10 +31,10 @@ public class JWTAuthenticationFilter extends GenericFilterBean {
                 .getUserEmail((HttpServletRequest) request);
 
         Long accountId = userRepository.findByEmail(userEmail).getAccount().getId();
-        AccountPrincipal principal = new AccountPrincipal(userEmail, accountId);
-        System.out.println(principal);
+//        AccountPrincipal principal = new AccountPrincipal(userEmail, accountId);
+
         Authentication authentication = new UsernamePasswordAuthenticationToken(
-                principal,
+                accountId,
                 null,
                 Collections.emptyList()
         );

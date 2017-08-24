@@ -10,6 +10,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(collectionResourceRel = "customers", path = "customers")
 public interface CustomerRepository extends PagingAndSortingRepository<Customer, Long> {
     @Override
-    @Query("select c from Customer c where c.account.id = ?#{principal.username}")
+    @Query("select c from Customer c where c.account.id = ?#{principal}")
     Page<Customer> findAll(Pageable pageable);
 }

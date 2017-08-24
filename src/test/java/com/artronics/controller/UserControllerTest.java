@@ -23,7 +23,8 @@ public class UserControllerTest extends ApiControllerTest {
 
     @Test
     public void it_should_create_user_in_POST_request() throws Exception {
-        User user = new User("foo");
+        User user = new User();
+        user.setName("foo");
 
         // should be any otherwise will return null
         given(userService.create(any(User.class))).willReturn(user);

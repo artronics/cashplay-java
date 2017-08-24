@@ -1,6 +1,5 @@
 package com.artronics.service;
 
-import com.artronics.model.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -15,12 +14,12 @@ public class TokenAuthenticationService {
     static final String TOKEN_PREFIX = "Bearer";
     static final String HEADER_STRING = "Authorization";
 
-    public static void addAuthentication(HttpServletResponse res, User user) {
+    public static void addAuthentication(HttpServletResponse res, Object accountId) {
         HashMap<String, Object> claims = new HashMap<>();
 //        claims.put("account", user.getAccount().getName());
 
         String JWT = Jwts.builder()
-                .setSubject(user.getEmail())
+                .setSubject(accountId.toString())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET)
 //                .setClaims(claims)

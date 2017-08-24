@@ -36,15 +36,16 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
                 .readValue(req.getInputStream(), AccountCredentials.class);
 
         User user = userRepository.findByEmail(creds.getEmail());
-        AccountPrincipal principal = new AccountPrincipal(user.getEmail(), user.getAccount().getId());
 
-        Authentication authentication = getAuthenticationManager().authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        principal,
-                        creds.getPassword(),
-                        Collections.emptyList()
-                )
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+                user.getAccount().getId(),
+                creds.getPassword(),
+                Collections.emptyList()
         );
+        token.setDetails(creds.getEmail());
+
+        Authentication authentication = getAuthenticationManager().authenticate(token);
+
         return authentication;
     }
 
@@ -54,8 +55,6 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
             HttpServletResponse res, FilterChain chain,
             Authentication auth) throws IOException, ServletException {
 
-        AccountPrincipal principal = (AccountPrincipal) auth.getPrincipal();
-        User user = userRepository.findByEmail(principal.getEmail());
-        TokenAuthenticationService.addAuthentication(res, user);
+        TokenAuthenticationService.addAuthentication(res, auth.getPrincipal());
     }
 }
