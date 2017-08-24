@@ -37,6 +37,13 @@ public class DataLoader implements ApplicationRunner {
         user.setAccount(account);
         userRepository.save(user);
 
+        User reza = new User();
+        reza.setName("reza");
+        reza.setEmail("reza_21622@yahoo.co.uk");
+        reza.setPassword(encoder.encode("secret"));
+        reza.setAccount(account);
+        userRepository.save(reza);
+
         Customer c1 = new Customer(account, "Jalal", "Hosseini");
         Customer c2 = new Customer(account, "magid", "sarhangi");
         Customer c3 = new Customer(account, "Reza", "Hosseini");

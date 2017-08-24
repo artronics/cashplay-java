@@ -27,11 +27,8 @@ public class JWTAuthenticationFilter extends GenericFilterBean {
                          ServletResponse response,
                          FilterChain filterChain)
             throws IOException, ServletException {
-        String userEmail = TokenAuthenticationService
-                .getUserEmail((HttpServletRequest) request);
-
-        Long accountId = userRepository.findByEmail(userEmail).getAccount().getId();
-//        AccountPrincipal principal = new AccountPrincipal(userEmail, accountId);
+        Long accountId = TokenAuthenticationService
+                .getAccountId((HttpServletRequest) request);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(
                 accountId,

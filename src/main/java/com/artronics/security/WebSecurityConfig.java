@@ -1,5 +1,6 @@
 package com.artronics.security;
 
+import com.artronics.repository.AccountRepository;
 import com.artronics.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,6 +21,8 @@ import org.springframework.security.web.header.writers.StaticHeadersWriter;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    AccountRepository accountRepository;
 
     @Autowired
     @Qualifier("myAuthenticationManager")
@@ -39,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 // We filter the api/login requests
-                .addFilterBefore(new JWTLoginFilter("/api/login", authenticationManager, userRepository),
+                .addFilterBefore(new JWTLoginFilter("/api/login", authenticationManager, userRepository, accountRepository),
                         UsernamePasswordAuthenticationFilter.class)
                 // And filter other requests to check the presence of JWT in header
                 .addFilterBefore(new JWTAuthenticationFilter(userRepository),
