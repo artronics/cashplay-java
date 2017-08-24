@@ -67,7 +67,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
         addUserAndAccountToRes(res, auth);
 
-        TokenAuthenticationService.addAuthentication(res, auth.getPrincipal());
+        TokenAuthenticationService.addAuthentication(res, (Long) auth.getPrincipal());
     }
 
     private void addUserAndAccountToRes(HttpServletResponse res, Authentication auth) throws IOException {

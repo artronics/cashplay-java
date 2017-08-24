@@ -14,7 +14,7 @@ public class TokenAuthenticationService {
     static final String TOKEN_PREFIX = "Bearer";
     static final String HEADER_STRING = "Authorization";
 
-    public static void addAuthentication(HttpServletResponse res, Object accountId) {
+    public static void addAuthentication(HttpServletResponse res, Long accountId) {
         HashMap<String, Object> claims = new HashMap<>();
 //        claims.put("account", user.getAccount().getName());
 
