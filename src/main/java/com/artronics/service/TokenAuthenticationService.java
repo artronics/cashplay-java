@@ -36,12 +36,12 @@ public class TokenAuthenticationService {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
             // parse the token.
-            String accountIdStr = Jwts.parser()
+            String accountIdStr = (String) Jwts.parser()
                     .setSigningKey(SECRET)
                     .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                     .getBody()
 //                    .getSubject();
-                    .get("sub").toString();
+                    .get("sub");
 
             return accountIdStr == null ? null : Long.parseLong(accountIdStr);
         }
@@ -52,11 +52,11 @@ public class TokenAuthenticationService {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
             // parse the token.
-            String userIdStr = Jwts.parser()
+            String userIdStr = (String) Jwts.parser()
                     .setSigningKey(SECRET)
                     .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                     .getBody()
-                    .get("userId").toString();
+                    .get("userId");
 
             return userIdStr == null ? null : Long.parseLong(userIdStr);
         }

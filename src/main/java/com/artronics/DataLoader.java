@@ -44,12 +44,12 @@ public class DataLoader implements ApplicationRunner {
         reza.setAccount(account);
         userRepository.save(reza);
 
-        Customer c1 = new Customer(account, "Jalal", "Hosseini");
+        Customer c1 = new Customer(account, "jalal", "hosseini");
         Customer c2 = new Customer(account, "magid", "sarhangi");
-        Customer c3 = new Customer(account, "Reza", "Hosseini");
-        Customer c4 = new Customer(account, "Ali", "Moghadasian");
-        Customer c5 = new Customer(account, "Nazanin", "Keshmiri");
-        Customer c6 = new Customer(account, "Akram", "Sabzalipour");
+        Customer c3 = new Customer(account, "reza", "hosseini");
+        Customer c4 = new Customer(account, "ali", "moghadasian");
+        Customer c5 = new Customer(account, "nazanin", "keshmiri");
+        Customer c6 = new Customer(account, "akram", "sabzalipour");
 
         customerRepository.save(c1);
         customerRepository.save(c2);
@@ -74,7 +74,7 @@ public class DataLoader implements ApplicationRunner {
         Customer c3 = new Customer(account, "kos", "kosmashang");
         Customer c4 = new Customer(account, "jafang", "jagana");
         Customer c5 = new Customer(account, "ajdar", "jeefar");
-        Customer c6 = new Customer(account, "ak", "gholian");
+        Customer c6 = new Customer(account, "magid", "sarhangi");
 
         customerRepository.save(c1);
         customerRepository.save(c2);
