@@ -1,6 +1,8 @@
 package com.artronics.model;
 
 
+import com.artronics.model.order.Order;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import java.util.Currency;

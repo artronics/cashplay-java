@@ -1,4 +1,4 @@
-package com.artronics.model;
+package com.artronics.model.order;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;

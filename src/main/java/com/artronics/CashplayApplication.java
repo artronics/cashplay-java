@@ -26,6 +26,16 @@ public class CashplayApplication {
     }
 
 //    @Bean
+//    CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+//        configuration.setAllowedMethods(Arrays.asList("GET","POST","OPTION","PUT","PATCH"));
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
+
+//    @Bean
 //    public FilterRegistrationBean headerModifierFilter() {
 //	    FilterRegistrationBean register = new FilterRegistrationBean();
 //	    register.setFilter(new HeaderModifierFilter());

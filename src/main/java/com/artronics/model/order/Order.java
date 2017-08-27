@@ -1,4 +1,7 @@
-package com.artronics.model;
+package com.artronics.model.order;
+
+import com.artronics.model.BaseModel;
+import com.artronics.model.Invoice;
 
 import javax.persistence.*;
 
